@@ -1,0 +1,20 @@
+{
+  "name": "emailer",
+  "version": "1.0.0",
+  "description": "```js\r const sendEmail = async () => {\r   try {\r     const response = await fetch('https://your-azure-app-url.azurewebsites.net/api/send-email', {\r       method: 'POST',\r       headers: {\r         'Content-Type': 'application/json',\r       },\r       body: JSON.stringify({\r         to: 'customer@example.com',\r         subject: 'Welcome to the App!',\r         htmlData: '<h1>Hello!</h1><p>Thanks for signing up.</p>'\r       }),\r     });",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.1",
+    "express": "^5.2.1",
+    "nodemailer": "^8.0.5"
+  }
+}
