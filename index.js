@@ -50,8 +50,11 @@ app.post('/api/send-email', async (req, res) => {
     }
 });
 
-// Start the server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Email service running on port ${PORT}`);
-});
+// REMOVE THIS:
+// const PORT = process.env.PORT || 3000;
+// app.listen(PORT, () => {
+//    console.log(`Email service running on port ${PORT}`);
+// });
+
+// ADD THIS INSTEAD:
+module.exports = app;
