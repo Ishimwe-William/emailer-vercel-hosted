@@ -22,27 +22,27 @@ const transporter = nodemailer.createTransport({
 
 // The API Endpoint
 app.post('/api/send-email', async (req, res) => {
-    // Extract data sent from your mobile app
-    const { to, subject, htmlData } = req.body;
+    // 1. Extract appName along with the rest of the data
+    const { to, subject, htmlData, appName } = req.body;
 
-    // Basic validation
     if (!to || !htmlData) {
         return res.status(400).json({ error: 'Missing receiver (to) or htmlData' });
     }
 
     try {
-        // Define the email options
+        // 2. Set a fallback name just in case the appName is missing
+        const senderName = appName || 'Smart Box System';
+
         const mailOptions = {
-            from: `"My App Name" <${process.env.SMTP_USER}>`, // Sender address
-            to: to,                                           // Receiver address
-            subject: subject || 'No Subject',                 // Subject line
-            html: htmlData,                                   // HTML body content
+            from: `"${senderName}" <${process.env.SMTP_USER}>`, // 3. Use dynamic sender Name
+            to: to,
+            subject: subject || 'No Subject',
+            html: htmlData,
         };
 
-        // Send the email
         const info = await transporter.sendMail(mailOptions);
         console.log('Message sent: %s', info.messageId);
-        
+
         res.status(200).json({ success: true, message: 'Email sent successfully!' });
     } catch (error) {
         console.error('Error sending email:', error);
